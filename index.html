@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divisibility Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px #ccc;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #007bff;
+            background-color: #f0f8ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Divisibility by 18 Checker</h2>
+        <input type="number" id="inputNumber" placeholder="Enter a number" required />
+        <button onclick="checkDivisibility()">Check</button>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function checkDivisibility() {
+            const input = document.getElementById("inputNumber").value;
+            const num = parseInt(input);
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = "";
+
+            if (isNaN(num)) {
+                resultDiv.innerHTML = "Please enter a valid number!";
+                return;
+            }
+
+            if (num % 18 === 0) {
+                const times = num / 18;
+                resultDiv.innerHTML = `Yes, ${num} is divisible by 18. It is divisible ${times} times.`;
+            } else {
+                const nearestLower = Math.floor(num / 18) * 18;
+                const nearestHigher = (Math.floor(num / 18) + 1) * 18;
+
+                resultDiv.innerHTML = `${num} is not divisible by 18.<br> 
+                                       Suggested numbers divisible by 18 are: 
+                                       ${nearestLower} and ${nearestHigher}.`;
+            }
+        }
+    </script>
+</body>
+</html>
